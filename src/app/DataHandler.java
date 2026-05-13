@@ -1,18 +1,21 @@
 package app;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class DataHandler {
 
-    String[] fruits = new DataRepository().getData();
+    private final DataRepository dataRepository;
+    private int count;
+
+    public DataHandler(DataRepository dataRepository) {
+        this.dataRepository = dataRepository;
+    }
 
     public void getOutput() {
 
         synchronized (this) {
             StringBuilder sb = new StringBuilder();
-            AtomicInteger count = new AtomicInteger(1);
+            String[] fruits = dataRepository.getData();
             for (String fruit : fruits) {
-                sb.append(String.format("(%d) %s ", count.getAndIncrement(), fruit));
+                sb.append(String.format("(%d) %s ", ++count, fruit));
             }
             System.out.println(Thread.currentThread().getName() + ": " + sb);
         }
