@@ -2,7 +2,7 @@ package app;
 
 public class MyThread extends Thread {
 
-    DataHandler dataHandler;
+    private final DataHandler dataHandler;
 
     public MyThread(String name, DataHandler dataHandler) {
         super(name);
